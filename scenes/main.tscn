@@ -4,5 +4,6 @@
 
 [node name="Main" type="Node"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_8lf1e")
+offset = Vector2(375, 350)
