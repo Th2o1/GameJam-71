@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgd5jn3m0ks4s"]
+[gd_scene load_steps=5 format=3 uid="uid://dbk51ue7ivnlm"]
 
 [ext_resource type="Texture2D" uid="uid://d3w23mggvxh0a" path="res://assets/Tileset.png" id="1_jcrwn"]
-[ext_resource type="Texture2D" uid="uid://balhsumabgptd" path="res://assets/bombe/BOMBA.png" id="2_15ls5"]
+[ext_resource type="Texture2D" uid="uid://byc27qo0ahnea" path="res://assets/bombe/BOMBA.png" id="2_15ls5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_580o8"]
 texture = ExtResource("1_jcrwn")
