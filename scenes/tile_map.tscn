@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgd5jn3m0ks4s"]
+
+[ext_resource type="Texture2D" uid="uid://d3w23mggvxh0a" path="res://assets/Tileset.png" id="1_jcrwn"]
+[ext_resource type="Texture2D" uid="uid://balhsumabgptd" path="res://assets/bombe/BOMBA.png" id="2_15ls5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_580o8"]
+texture = ExtResource("1_jcrwn")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tr45e"]
+tile_size = Vector2i(50, 50)
+sources/0 = SubResource("TileSetAtlasSource_580o8")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_tr45e")
+format = 2
+layer_0/name = "Mines"
+layer_0/tile_data = PackedInt32Array(131073, 262144, 0)
+layer_1/name = "Numbers"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Grass"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Flags"
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "Hover"
+layer_4/tile_data = PackedInt32Array()
+
+[node name="Tileset" type="Sprite2D" parent="."]
+position = Vector2(49, -1)
+texture = ExtResource("1_jcrwn")
+
+[node name="Bomba" type="Sprite2D" parent="."]
+position = Vector2(-30, 224)
+texture = ExtResource("2_15ls5")
