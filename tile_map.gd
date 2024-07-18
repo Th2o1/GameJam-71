@@ -47,9 +47,28 @@ func generate_mines():
 		set_cell(mine_layer, mine_pos, tile_id, mine_atlas)
 
 func generate_numbers():
+	print(get_empty_cells())
 	#get empty cells
 	#iterate through empty cells and get all surround cells
+	#add up numbers of mines inside surrounding cells
+	
+func get_empty_cells():
+	var empty_cells := []
+	#iterate over grid
+	for y in range(rows):
+		for x in range(cols):
+			#check if the cell is empty and add it to the array
+			if not is_mine(Vector2i(x, y)):
+				empty_cells.append(Vector2i(x, y))
+	return empty_cells
+			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+
+#helper functions
+func is_mine(pos):
+	get_cell_source_id(mine_layer, pos) != -1
