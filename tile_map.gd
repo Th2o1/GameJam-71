@@ -35,15 +35,20 @@ func new_game():
 	clear()
 	mine_coords.clear()
 	generate_mines()
+	generate_numbers()
 
 func generate_mines():
 	for i in range(get_parent().total_mines):
 		var mine_pos = Vector2i(randi_range(0, cols - 1), randi_range(0, rows - 1))
+		while mine_coords.has(mine_pos):
+			mine_pos = Vector2i(randi_range(0, cols - 1), randi_range(0, rows - 1))
 		mine_coords.append(mine_pos)
 		#add mine to tilemap
 		set_cell(mine_layer, mine_pos, tile_id, mine_atlas)
 
-
+func generate_numbers():
+	#get empty cells
+	#iterate through empty cells and get all surround cells
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
