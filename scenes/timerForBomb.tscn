@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://0q5r3q35hs1j"]
+
+[ext_resource type="Script" path="res://scenes/timerForBomb.gd" id="1_j58uu"]
+[ext_resource type="Texture2D" uid="uid://cg5p620vp1rnq" path="res://assets/timer.png" id="2_tsl48"]
+
+[node name="TimerForBomb" type="Node2D"]
+script = ExtResource("1_j58uu")
+
+[node name="timerSprite" type="Sprite2D" parent="."]
+position = Vector2(89, 199)
+texture = ExtResource("2_tsl48")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 29.0
+offset_top = 183.0
+offset_right = 147.0
+offset_bottom = 233.0
+
+[node name="timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
