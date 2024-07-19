@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d2qkxa2i432xi" path="res://assets/bg.png" id="1_8lf1e"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_l56pp"]
 [ext_resource type="PackedScene" uid="uid://cgd5jn3m0ks4s" path="res://tile_map.tscn" id="3_j5tii"]
-[ext_resource type="PackedScene" path="res://scenes/test.tscn" id="4_krfop"]
+[ext_resource type="PackedScene" uid="uid://b3oir8gatrnin" path="res://scenes/test.tscn" id="4_krfop"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_l56pp")
@@ -15,3 +15,4 @@ offset = Vector2(375, 350)
 [node name="TileMap" parent="." instance=ExtResource("3_j5tii")]
 
 [node name="Test" parent="." instance=ExtResource("4_krfop")]
+position = Vector2(-173, -161)
