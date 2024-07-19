@@ -95,11 +95,11 @@ func get_all_surround_cells(middle_cell):
 			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
 
 #helper functions
 func is_mine(pos):
-	get_cell_source_id(mine_layer, pos) != -1
+	return get_cell_source_id(mine_layer, pos) != -1
