@@ -20,11 +20,16 @@ var hover_layer : int=4
 
 #atlas coordinates
 var mine_atlas := Vector2i(4, 0)
+var number_atlas : Array = generate_number_atlas()
 
 #liste pour stocker les coords des mines
 var mine_coords := []
 
-
+func generate_number_atlas():
+	var a := []
+	for i in range(8):
+		a.append(Vector2i(i, 1))
+	return a 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,7 +52,17 @@ func generate_mines():
 		set_cell(mine_layer, mine_pos, tile_id, mine_atlas)
 
 func generate_numbers():
-	print(get_empty_cells())
+	for i in get_empty_cells():
+		var mine_count : int = 0
+		for j in get_all_surround_cells(i):
+			#check if there is a mine in the cell
+			if is_mine(j):
+				mine_count += 1
+		#once counted, add the number cell to the tilemap
+		if mine_count > 0:
+			set_cell(numbers_layer, i, tile_id, number_atlas[mine_count - 1])
+		
+	
 	#get empty cells
 	#iterate through empty cells and get all surround cells
 	#add up numbers of mines inside surrounding cells
@@ -61,6 +76,22 @@ func get_empty_cells():
 			if not is_mine(Vector2i(x, y)):
 				empty_cells.append(Vector2i(x, y))
 	return empty_cells
+	
+	
+func get_all_surround_cells(middle_cell):
+	var surrounding_cells := []
+	var target_cell
+	for y in range (3):
+		for x in range (3):
+			target_cell = middle_cell + Vector2i(x - 1, y - 1)
+			#skip cell if it is the one in the middle
+			if target_cell != middle_cell:
+				#check that the cell is on the grid
+				if (target_cell.x >= 0 and target_cell.x <= cols - 1 and target_cell.y >= 0 and target_cell.y <= rows - 1):
+					surrounding_cells.append(target_cell)
+	return surrounding_cells
+			
+	
 			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
