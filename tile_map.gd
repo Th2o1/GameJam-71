@@ -20,7 +20,9 @@ var hover_layer : int=4
 
 #atlas coordinates
 var mine_atlas := Vector2i(4, 0)
+var flag_atlas := Vector2i(5, 0)
 var number_atlas : Array = generate_number_atlas()
+var hover_atlas := Vector2i(6, 0)
 
 #liste pour stocker les coords des mines
 var mine_coords := []
@@ -41,6 +43,8 @@ func new_game():
 	mine_coords.clear()
 	generate_mines()
 	generate_numbers()
+	generate_grass()
+	
 
 func generate_mines():
 	for i in range(get_parent().total_mines):
@@ -63,9 +67,11 @@ func generate_numbers():
 			set_cell(numbers_layer, i, tile_id, number_atlas[mine_count - 1])
 		
 	
-	#get empty cells
-	#iterate through empty cells and get all surround cells
-	#add up numbers of mines inside surrounding cells
+func generate_grass():
+	for y in range(rows):
+		for x in range(cols):
+			var toggle = ((x + y) % 2)
+			set_cell(grass_layer, Vector2i(x, y), tile_id, Vector2i(3 - toggle, 0))
 	
 func get_empty_cells():
 	var empty_cells := []
@@ -92,14 +98,53 @@ func get_all_surround_cells(middle_cell):
 	return surrounding_cells
 			
 	
-			
+func _input(event):
+	if event is InputEventMouseButton:
+		#check if mouse is in the game board
+		if event.position.y < rows * cell_size:
+			var map_pos := local_to_map(event.position)
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				pass
+			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				process_right_click(map_pos)
+				
+				
+func process_right_click(pos):
+	#check if it is grass cell
+	if is_grass(pos):
+		if is_flag(pos):
+			pass
+		else:
+			set_cell(flags_layer, pos, tile_id, flag_atlas)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
-
+	highlight_cell()
+	
+	
+func highlight_cell():
+	var mouse_pos := local_to_map(get_local_mouse_position())
+	clear_layer(hover_layer)
+	if is_grass(mouse_pos):
+		set_cell(hover_layer, mouse_pos, tile_id, hover_atlas)
+	else:
+		#if the cell is cleared only hover over numbers cells
+		if is_number(mouse_pos):
+			set_cell(hover_layer, mouse_pos, tile_id, hover_atlas)
 
 
 #helper functions
 func is_mine(pos):
 	return get_cell_source_id(mine_layer, pos) != -1
+	
+	
+func is_grass(pos):
+	return get_cell_source_id(grass_layer, pos) != -1
+
+
+func is_number(pos):
+	return get_cell_source_id(numbers_layer, pos) != -1
+	
+	
+func is_flag(pos):
+	return get_cell_source_id(numbers_layer, pos) != -1
