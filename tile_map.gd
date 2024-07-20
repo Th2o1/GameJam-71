@@ -104,18 +104,50 @@ func _input(event):
 		if event.position.y < rows * cell_size:
 			var map_pos := local_to_map(event.position)
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				pass
+				#check that there is no fleg
+				if not is_flag(map_pos):
+					#check if it is a mine
+					if is_mine(map_pos):
+						print("Game Over Looser")
+					else:
+						process_left_click(map_pos)
 			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 				process_right_click(map_pos)
+				
+				
+func process_left_click(pos):
+	var revealed_cells := []
+	var cells_to_reveal := [pos]
+	while not cells_to_reveal.is_empty():
+		#clear cell and mark it cleared
+		erase_cell(grass_layer, cells_to_reveal[0])
+		revealed_cells.append(cells_to_reveal[0])
+		#if the cell had a flag then clear it
+		if is_flag(cells_to_reveal[0]):
+			erase_cell(flags_layer, cells_to_reveal[0])
+		if not is_number(cells_to_reveal[0]):
+			cells_to_reveal = reveal_surrounding_cells(cells_to_reveal, revealed_cells)
+		#remove processed cell from array
+		cells_to_reveal.erase(cells_to_reveal[0])
+				
 				
 				
 func process_right_click(pos):
 	#check if it is grass cell
 	if is_grass(pos):
 		if is_flag(pos):
-			pass
+			erase_cell(flags_layer, pos)
 		else:
 			set_cell(flags_layer, pos, tile_id, flag_atlas)
+			
+			
+func reveal_surrounding_cells(cells_to_reveal, revealed_cells):
+	for i in get_all_surround_cells(cells_to_reveal[0]):
+	#check that the cell is not already revealed
+		if not revealed_cells.has(i):
+			if not cells_to_reveal.has(i):
+				cells_to_reveal.append(i)
+	return cells_to_reveal
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -147,4 +179,4 @@ func is_number(pos):
 	
 	
 func is_flag(pos):
-	return get_cell_source_id(numbers_layer, pos) != -1
+	return get_cell_source_id(flags_layer, pos) != -1
