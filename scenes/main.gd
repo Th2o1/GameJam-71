@@ -19,5 +19,8 @@ func new_game():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time_remaining -= delta
+	if time_remaining >= 0:
+		print("game over")
 	$Hud.get_node("timeLabel").text = str(int(time_remaining))
 	$Hud.get_node("remainingBomb").text = str(mines-$TimerForBomb.total_mine_defuse)
+	$Hud.get_node("action_left").text = str($TileMap.action_left)

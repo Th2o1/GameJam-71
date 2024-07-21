@@ -21,6 +21,7 @@ func _on_timer_timeout():
 	label.text = str(countdown_time)
 	if countdown_time <= 0:
 		timer.stop()
+		print("game over")
 		# Vous pouvez ajouter ici ce qui se passe quand le compte à rebours atteint zéro
 
 func start_timer():

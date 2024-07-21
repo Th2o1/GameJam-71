@@ -5,12 +5,11 @@ const rows : int=14
 const cols : int=15
 const cell_size : int=50
 
+# counting number of action
+var action_left : int=5
 
 #tilemap variables
 var tile_id : int=2
-
-#QTE variable
-var qte_is_active: bool=false
 
 #layer variables
 var mine_layer : int=0
@@ -111,6 +110,10 @@ func _input(event):
 			if event.position.y < rows * cell_size:
 				var map_pos := local_to_map(event.position)
 				if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+					if action_left <= 0:
+						print("game over")
+					else:
+						action_left -= 1
 					#check that there is no fleg
 					if not is_flag(map_pos):
 						#check if it is a mine
