@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ekw6wseebrj3"]
+[gd_scene load_steps=7 format=3 uid="uid://ekw6wseebrj3"]
 
 [ext_resource type="Texture2D" uid="uid://d2qkxa2i432xi" path="res://assets/bg.png" id="1_8lf1e"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_l56pp"]
 [ext_resource type="PackedScene" uid="uid://cgd5jn3m0ks4s" path="res://tile_map.tscn" id="3_j5tii"]
-[ext_resource type="PackedScene" uid="uid://0q5r3q35hs1j" path="res://scenes/timerForBomb.tscn" id="4_ea8ll"]
+[ext_resource type="PackedScene" uid="uid://0q5r3q35hs1j" path="res://scenes/timerForBomb.tscn" id="4_0d1ed"]
+[ext_resource type="PackedScene" uid="uid://cyulh3ym1kc6y" path="res://scenes/HUD.tscn" id="5_4884y"]
+[ext_resource type="PackedScene" uid="uid://cidcwlr45s6i7" path="res://scenes/gameOver.tscn" id="6_decp7"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_l56pp")
@@ -14,4 +16,8 @@ offset = Vector2(375, 350)
 
 [node name="TileMap" parent="." instance=ExtResource("3_j5tii")]
 
-[node name="TimerForBomb" parent="." instance=ExtResource("4_ea8ll")]
+[node name="TimerForBomb" parent="." instance=ExtResource("4_0d1ed")]
+
+[node name="Hud" parent="." instance=ExtResource("5_4884y")]
+
+[node name="GameOver" parent="." instance=ExtResource("6_decp7")]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyulh3ym1kc6y"]
+
+[ext_resource type="Texture2D" uid="uid://cg5p620vp1rnq" path="res://assets/timer.png" id="1_75le1"]
+[ext_resource type="Texture2D" uid="uid://b47787nncrm1s" path="res://assets/bombe/BOMBAFix.png" id="2_qi2r1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy6np"]
+bg_color = Color(0.371759, 0.677774, 0.477222, 1)
+
+[node name="Hud" type="CanvasGroup"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_top = 700.0
+offset_right = 750.0
+offset_bottom = 750.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vy6np")
+
+[node name="timer" type="Sprite2D" parent="."]
+position = Vector2(575, 725)
+scale = Vector2(0.491, 0.446)
+texture = ExtResource("1_75le1")
+
+[node name="BombaFix" type="Sprite2D" parent="."]
+position = Vector2(117, 709)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qi2r1")
+offset = Vector2(25, 25)
+
+[node name="remainingBomb" type="Label" parent="."]
+offset_left = 159.0
+offset_top = 707.0
+offset_right = 199.0
+offset_bottom = 741.0
+theme_override_font_sizes/font_size = 24
+text = "56"
+
+[node name="timeLabel" type="Label" parent="."]
+offset_left = 551.0
+offset_top = 711.0
+offset_right = 591.0
+offset_bottom = 745.0
+theme_override_font_sizes/font_size = 24
+text = "0
+"
