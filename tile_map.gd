@@ -9,6 +9,8 @@ const cell_size : int=50
 #tilemap variables
 var tile_id : int=2
 
+#QTE variable
+var qte_is_active: bool=false
 
 #layer variables
 var mine_layer : int=0
@@ -103,23 +105,23 @@ func get_all_surround_cells(middle_cell):
 			
 	
 func _input(event):
-	if event is InputEventMouseButton:
-		#check if mouse is in the game board
-		if event.position.y < rows * cell_size:
-			var map_pos := local_to_map(event.position)
-			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				#check that there is no fleg
-				if not is_flag(map_pos):
-					#check if it is a mine
-					if is_mine(map_pos):
-						var cells_to_reveal := [map_pos]
-						erase_cell(grass_layer, cells_to_reveal[0])
-						defuse_bomb(map_pos)
-						print("Game Over Looser")
-					else:
-						process_left_click(map_pos)
-			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-				process_right_click(map_pos)
+	if !timer_node.qte_is_active:
+		if event is InputEventMouseButton:
+			#check if mouse is in the game board
+			if event.position.y < rows * cell_size:
+				var map_pos := local_to_map(event.position)
+				if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+					#check that there is no fleg
+					if not is_flag(map_pos):
+						#check if it is a mine
+						if is_mine(map_pos):
+							var cells_to_reveal := [map_pos]
+							erase_cell(grass_layer, cells_to_reveal[0])
+							defuse_bomb(map_pos)
+						else:
+							process_left_click(map_pos)
+				elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+					process_right_click(map_pos)
 				
 func defuse_bomb(pos):
 	var cells_to_reveal := [pos]

@@ -8,8 +8,8 @@ var sequence = []
 var current_index = 0
 var current_key = ""
 var countdown_time = 5  # Temps en secondes pour le compte à rebours
-
-
+var total_mine_defuse = 0
+var qte_is_active = false
 
 func _ready():
 	timer.wait_time = 1
@@ -28,12 +28,12 @@ func start_timer():
 	label.text = str(countdown_time)
 	timer.start()
 	start_qte()
-	
 	label.text = str(countdown_time)
 	
 #Parti QTE
 
 func start_qte():
+	qte_is_active = true
 	generate_sequence(5)
 	current_index = 0
 	keyToPress.text = "Appuyez sur: " + sequence[current_index]
@@ -57,8 +57,10 @@ func _input(event):
 
 
 func qte_success():
+	qte_is_active = false
 	print('Win !')
 	timer.stop()
+	total_mine_defuse+=1	
 	self.hide()
 
 #Helper 

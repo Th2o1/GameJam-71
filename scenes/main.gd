@@ -4,7 +4,7 @@ extends Node
 #games variables
 const total_mines : int=40
 var time_remaining : float
-var remaining_mines : int
+var mines : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +12,7 @@ func _ready():
 	
 func new_game():
 	time_remaining = 120
-	remaining_mines = total_mines
+	mines = total_mines
 	$GameOver.hide()
 	$TimerForBomb.hide()
 
@@ -20,4 +20,4 @@ func new_game():
 func _process(delta):
 	time_remaining -= delta
 	$Hud.get_node("timeLabel").text = str(int(time_remaining))
-	$Hud.get_node("remainingBomb").text = str(remaining_mines)
+	$Hud.get_node("remainingBomb").text = str(mines-$TimerForBomb.total_mine_defuse)
