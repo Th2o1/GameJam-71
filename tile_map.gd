@@ -27,6 +27,10 @@ var hover_atlas := Vector2i(6, 0)
 #liste pour stocker les coords des mines
 var mine_coords := []
 
+#timer node
+@onready var timer_node = $"../TimerForBomb"
+
+
 func generate_number_atlas():
 	var a := []
 	for i in range(8):
@@ -108,12 +112,21 @@ func _input(event):
 				if not is_flag(map_pos):
 					#check if it is a mine
 					if is_mine(map_pos):
+						var cells_to_reveal := [map_pos]
+						erase_cell(grass_layer, cells_to_reveal[0])
+						defuse_bomb(map_pos)
 						print("Game Over Looser")
 					else:
 						process_left_click(map_pos)
 			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 				process_right_click(map_pos)
 				
+func defuse_bomb(pos):
+	var cells_to_reveal := [pos]
+	erase_cell(grass_layer, cells_to_reveal[0])
+	timer_node.show()
+	timer_node.start_timer()
+
 				
 func process_left_click(pos):
 	var revealed_cells := []

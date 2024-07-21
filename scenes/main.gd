@@ -14,6 +14,7 @@ func new_game():
 	time_remaining = 120
 	remaining_mines = total_mines
 	$GameOver.hide()
+	$TimerForBomb.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
