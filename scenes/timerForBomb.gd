@@ -57,6 +57,8 @@ func _input(event):
 func qte_success():
 	print('Win !')
 	timer.stop()
+	
+	self.hide()
 
 #Helper 
 func get_scancode_from_key_string(key_string: String) -> int:
