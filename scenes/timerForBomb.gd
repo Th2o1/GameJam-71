@@ -24,6 +24,8 @@ func _on_timer_timeout():
 		# Vous pouvez ajouter ici ce qui se passe quand le compte à rebours atteint zéro
 
 func start_timer():
+	countdown_time = 5
+	label.text = str(countdown_time)
 	timer.start()
 	start_qte()
 	
@@ -57,7 +59,6 @@ func _input(event):
 func qte_success():
 	print('Win !')
 	timer.stop()
-	
 	self.hide()
 
 #Helper 
